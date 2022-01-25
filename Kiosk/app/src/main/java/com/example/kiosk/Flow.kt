@@ -1,15 +1,12 @@
 package com.example.kiosk
 
 import java.lang.NumberFormatException
+import java.text.NumberFormat
 import kotlin.system.exitProcess
 import com.example.kiosk.Pay as Pay
 import com.example.kiosk.Setting as Setting
 import com.example.kiosk.Basket as Basket
 import com.example.kiosk.Menu as Menu
-
-
-
-//플로우 메뉴 카테고리 장바구니 영수증
 
 class Flow {
     var pay = Pay()
@@ -39,21 +36,31 @@ class Flow {
         }
     }
 
+    fun nullException(a: Int?) {
+        var a = a
+        try {
+            a = readLine()?.toInt()
+        } catch (e: NumberFormatException){
+            null
+        } finally {
 
-
-
+        }
+    }
 
     fun orderFlow() {
         startOrder()
-        basket.setCategory()
-        basket.setBeverage()
-        basket.setTopping()
+        while (true) {
+            basket.categoryLogic()
+            basket.beverageLogic()
+            basket.toppingLogic()
+            if (basket.orderCount == 2){
+                break
+            }
+        }
+        pay.payLogic()
+
     }
 }
-
-
-//카테고리 선정까지 완료
-// 위 함수들 Basket으로 옮길것
 
 fun main() {
     var flow = Flow()
