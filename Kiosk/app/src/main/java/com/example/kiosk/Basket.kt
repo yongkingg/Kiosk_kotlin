@@ -12,6 +12,7 @@ class Basket(menu:Menu) {
 
     var basket = ArrayList<Any>()
     var basketCost = ArrayList<Int>()
+
     init{
     }
 
@@ -71,7 +72,6 @@ class Basket(menu:Menu) {
     fun isTopping(){
         while (true) {
             println("토핑을 추가하려면 1.을, 아니면 2.를 눌러주세요.")
-
             try {
                 isOrder = readLine()!!.toInt()
             } catch (e: NumberFormatException) {
@@ -157,7 +157,5 @@ class Basket(menu:Menu) {
                     }
                 }
             }
-    }
-
-
+        }
 }

@@ -26,7 +26,4 @@ class Menu {
 
     init {
     }
-
-    fun printMenu(){
-    }
 }

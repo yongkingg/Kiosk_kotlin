@@ -1,5 +1,4 @@
 package com.example.kiosk
-
 import java.lang.NumberFormatException
 
 class Pay(basket: Basket) {
@@ -34,7 +33,6 @@ class Pay(basket: Basket) {
             }
         }
     }
-
 
     fun setCard() {
         println("카드를 넣고 1.을 눌러주세요.")
@@ -77,7 +75,6 @@ class Pay(basket: Basket) {
         }
     }
 
-
     fun calculate() {
         for (index in 0 until basket.basketCost.count()) {
             total += basket.basketCost[index]
@@ -96,7 +93,6 @@ class Pay(basket: Basket) {
         calculate()
         println("이용해주셔서 감사합니다.")
     }
-
 
     fun payLogic(){
         setTakeout()

@@ -13,7 +13,6 @@ class Flow {
     var menu = Menu()
     var basket = Basket(menu)
     var pay = Pay(basket)
-    var setting = Setting()
     var startOrder: Int? = 0
 
     init {
