@@ -1,8 +1,6 @@
 package com.example.kiosk
 
 import java.lang.NumberFormatException
-import java.text.NumberFormat
-import kotlin.system.exitProcess
 import com.example.kiosk.Pay as Pay
 import com.example.kiosk.Setting as Setting
 import com.example.kiosk.Basket as Basket
@@ -13,6 +11,7 @@ class Flow {
     var menu = Menu()
     var basket = Basket(menu)
     var pay = Pay(basket)
+    var setting = Setting(menu)
     var startOrder: Int? = 0
 
     init {
@@ -23,9 +22,9 @@ class Flow {
         println("주문하시겠습니까?\n주문하시려면 1.번을 눌러주세요")
         while (true) {
             try {
-                startOrder = readLine()?.toInt()
+                startOrder = readLine()!!.toInt()
             } catch (e: NumberFormatException) {
-                null
+                startOrder = 0
             } finally {
                 if (startOrder == 1) {
                     break
@@ -42,11 +41,12 @@ class Flow {
             basket.categoryLogic()
             basket.beverageLogic()
             basket.toppingLogic()
-            basket.additonalOrder()
-            if (basket.isPlusOrder == 2){
+            basket.checkOrder()
+            if (basket.isOrderChange == 2){
                 break
             }
         }
+
         pay.payLogic()
 
     }

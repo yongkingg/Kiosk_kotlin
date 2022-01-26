@@ -15,7 +15,7 @@ class Pay(basket: Basket) {
         println("포장하시려면 1.을, 매장에서 드시려면 2.를 눌러주세요")
         while (true){
             try {
-                isTakeOut = readLine()?.toInt()
+                isTakeOut = readLine()!!.toInt()
             } catch (e: NumberFormatException){
                 null
             } finally {
@@ -38,7 +38,7 @@ class Pay(basket: Basket) {
         println("카드를 넣고 1.을 눌러주세요.")
         while (true) {
             try{
-                inputCard = readLine()?.toInt()
+                inputCard = readLine()!!.toInt()
             } catch (e: NumberFormatException) {
                 null
             } finally {
@@ -56,7 +56,7 @@ class Pay(basket: Basket) {
         println("영수증을 출력하시려면 1.을 영수증을 출력하지 않으려면 2.를 눌러주세요")
         while (true) {
             try{
-                isReceipt = readLine()?.toInt()
+                isReceipt = readLine()!!.toInt()
             } catch (e: NumberFormatException) {
                 null
             } finally {
