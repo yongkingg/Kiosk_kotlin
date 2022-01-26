@@ -9,9 +9,10 @@ import com.example.kiosk.Basket as Basket
 import com.example.kiosk.Menu as Menu
 
 class Flow {
-    var pay = Pay()
+
     var menu = Menu()
     var basket = Basket(menu)
+    var pay = Pay(basket)
     var setting = Setting()
     var startOrder: Int? = 0
 
@@ -36,24 +37,14 @@ class Flow {
         }
     }
 
-    fun nullException(a: Int?) {
-        var a = a
-        try {
-            a = readLine()?.toInt()
-        } catch (e: NumberFormatException){
-            null
-        } finally {
-
-        }
-    }
-
     fun orderFlow() {
         startOrder()
         while (true) {
             basket.categoryLogic()
             basket.beverageLogic()
             basket.toppingLogic()
-            if (basket.orderCount == 2){
+            basket.additonalOrder()
+            if (basket.isPlusOrder == 2){
                 break
             }
         }

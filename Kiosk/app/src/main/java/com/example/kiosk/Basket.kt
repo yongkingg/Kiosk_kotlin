@@ -8,10 +8,10 @@ class Basket(menu:Menu) {
     var beverageOrder: Int? = 0
     var toppingOrder: Int? = 0
     var isOrder: Int? = 0
-    var orderCount: Int? = 0
+    var isPlusOrder: Int? = 0
 
-    var basket = mutableListOf<Any>()
-
+    var basket = ArrayList<Any>()
+    var basketCost = ArrayList<Int>()
     init{
     }
 
@@ -107,7 +107,9 @@ class Basket(menu:Menu) {
                     println("다시 입력해 주세요")
                 } else{
                     println("${menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]}에 ${menu.topping[toppingOrder!!-1]}이 담겼습니다. ")
-                    basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],menu.costList[categoryNum!! - 1][beverageOrder!! - 1],menu.topping[toppingOrder!!-1],menu.toppingCost[toppingOrder!!-1]))
+                    basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],"${menu.topping[toppingOrder!!-1]} 추가"))
+                    basketCost.add(menu.costList[categoryNum!!-1][beverageOrder!! - 1])
+                    basketCost.add(menu.toppingCost[toppingOrder!!-1])
                     break
                 }
             }
@@ -124,31 +126,38 @@ class Basket(menu:Menu) {
         setBeverage()
     }
 
-    fun toppingLogic(){
+    fun toppingLogic() {
         isTopping()
 
-        if (isOrder == 1){
+        if (isOrder == 1) {
             showTopping()
             setTopping()
         } else {
-            basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],menu.costList[categoryNum!! - 1][beverageOrder!! - 1]))
-        }
-
-        println("음료를 추가로 주문하려면 1.을, 결제화면으로 이동하려면 2.를 눌러주세요")
-
-        try {
-            orderCount = readLine()!!.toInt()
-        } catch (e: NumberFormatException) {
-            null
-        } finally {
-            if (orderCount == 1) {
-                println("음료를 추가로 주문합니다.")
-            } else if (orderCount == 2) {
-                println("결제화면으로 이동합니다.")
-            } else {
-                println("다시 입력해 주세요")
-            }
+            basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]))
+            basketCost.add(menu.costList[categoryNum!!-1][beverageOrder!! - 1])
         }
     }
+
+    fun additonalOrder() {
+        println("음료를 추가로 주문하려면 1.을, 결제화면으로 이동하려면 2.를 눌러주세요")
+        while (true) {
+            try {
+                isPlusOrder = readLine()!!.toInt()
+            } catch (e: NumberFormatException) {
+                null
+            } finally {
+                if (isPlusOrder == 1) {
+                    println("음료를 추가로 주문합니다.")
+                    break
+                } else if (isPlusOrder == 2) {
+                    println("결제화면으로 이동합니다.")
+                    break
+                } else {
+                    println("다시 입력해 주세요")
+                    }
+                }
+            }
+    }
+
 
 }
