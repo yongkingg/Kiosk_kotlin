@@ -76,19 +76,35 @@ class Pay(basket: Basket) {
     }
 
     fun calculate() {
-        for (index in 0 until basket.basketCost.count()) {
-            total += basket.basketCost[index]
+        for (beverage in 0 until basket.basketCost.count()) {
+            if (basket.basket[beverage].count() == 1) {
+                total += basket.basketCost[beverage][0]
+            } else {
+                for (index in 0 until basket.basketCost[beverage].count()) {
+                    total += basket.basketCost[beverage][index]
+                }
+            }
         }
-        println("총액          = $total")
+        println("=============================")
+        println("                 총액 = ${total}\n ")
     }
 
     fun showReceipt () {
         println("============[영수증]============")
         println("= 음료 수령 방식 => $isTakeOut")
-        println("= 결제 방식     => 카드결제")
-        println("= 주문 목록")
-        for (index in 0 until basket.basket.count()) {
-            println("${basket.basket[index]}")
+        println("= 결제 방식     => 카드결제\n")
+        println("           주문 목록")
+        println("==============================")
+        for (beverage in 0 until basket.basket.count()) {
+            if (basket.basket[beverage].count() == 1)  {
+                print("${basket.basket[beverage][0]}")
+            } else {
+                for (topping in 0 until basket.basket[beverage].count()) {
+                    print("${basket.basket[beverage][topping]}")
+                    print(" ")
+                }
+            }
+            println("")
         }
         calculate()
         println("이용해주셔서 감사합니다.")

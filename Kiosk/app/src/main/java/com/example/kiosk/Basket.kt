@@ -14,7 +14,7 @@ class Basket(menu:Menu) {
     var deleteBeverage: Int? = 0
 
     var basket = ArrayList<MutableList<String>>()
-    var basketCost = ArrayList<Int>()
+    var basketCost = ArrayList<MutableList<Int>>()
 
     init{
     }
@@ -109,8 +109,7 @@ class Basket(menu:Menu) {
                 } else{
                     println("${menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]}에 ${menu.topping[toppingOrder!!-1]}이 담겼습니다. ")
                     basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],"${menu.topping[toppingOrder!!-1]} 추가"))
-                    basketCost.add(menu.costList[categoryNum!!-1][beverageOrder!! - 1])
-                    basketCost.add(menu.toppingCost[toppingOrder!!-1])
+                    basketCost.add(mutableListOf(menu.costList[categoryNum!!-1][beverageOrder!! - 1], menu.toppingCost[toppingOrder!!-1]))
                     break
                 }
             }
@@ -158,19 +157,7 @@ class Basket(menu:Menu) {
                 if (deleteBeverage == 0 || deleteBeverage!! > basket.count()) {
                     println("다시 입력해 주세요")
                 } else {
-                    println("${basket[deleteBeverage!!-1]} 음료가 삭제되었습니다.")
-                    println(basket)
-                    println(basket[deleteBeverage!!-1].count())
-                    if (basket[deleteBeverage!!-1].count() == 2){
-                        basketCost.removeAt((deleteBeverage!!-1)*2)
-                        basketCost.removeAt((deleteBeverage!!-1)*2+1)
-                    } else{
-                        basketCost.removeAt(deleteBeverage!!)
-                    }
-                    basket.removeAt(deleteBeverage!!-1)
-
-                    println("Cost : $basketCost")
-                    println("beverage : $basket")
+                    basketCost.removeAt(deleteBeverage!!-1)
                     break
                 }
             }
@@ -195,7 +182,7 @@ class Basket(menu:Menu) {
             setTopping()
         } else {
             basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]))
-            basketCost.add(menu.costList[categoryNum!!-1][beverageOrder!! - 1])
+            basketCost.add(mutableListOf(menu.costList[categoryNum!! - 1][beverageOrder!! - 1]))
         }
     }
 
