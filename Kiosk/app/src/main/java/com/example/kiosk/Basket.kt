@@ -10,11 +10,10 @@ class Basket(menu:Menu) {
     var toppingOrder: Int? = 0
     var isOrder: Int? = 0
     var isOrderChange: Int? = 0
-
     var deleteBeverage: Int? = 0
 
-    var basket = ArrayList<MutableList<String>>()
-    var basketCost = ArrayList<MutableList<Int>>()
+    var basket = ArrayList<MutableList<Any>>()
+    var basketCost = ArrayList<MutableList<Any>>()
 
     init{
     }
@@ -26,6 +25,7 @@ class Basket(menu:Menu) {
             print(" ")
         }
         println()
+     setCategory()
     }
 
     fun setCategory() {
@@ -48,9 +48,10 @@ class Basket(menu:Menu) {
     fun showBeverage() {
         println("다음은 ${menu.category[categoryNum!!-1]} 음료 목룍입니다")
         for (i in 0 until menu.categoryList[categoryNum!!-1].size - 1) {
-            println("${i+1}. " + menu.categoryList[categoryNum!! - 1].get(i))
+            println("${i+1}. ${menu.categoryList[categoryNum!!-1][i][0]}")
         }
         println("무엇을 주문하시겠습니까?")
+        setBeverage()
     }
 
     fun setBeverage() {
@@ -63,7 +64,7 @@ class Basket(menu:Menu) {
                 if (beverageOrder!! >= menu.categoryList[categoryNum!! - 1].size || beverageOrder == 0) {
                     println("다시 입력해 주세요")
                 } else {
-                    println("장바구니에 " + menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1] + " 가 담겼습니다.")
+                    println("장바구니에 " + menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1][0] + " 가 담겼습니다.")
                     break
                 }
             }
@@ -93,7 +94,7 @@ class Basket(menu:Menu) {
 
     fun showTopping() {
         for (index in 0 until menu.topping.count()) {
-            println("${index + 1}. " + menu.topping[index])
+            println("${index + 1}. " + menu.topping[index][0])
         }
     }
 
@@ -107,9 +108,11 @@ class Basket(menu:Menu) {
                 if (toppingOrder == 0 || toppingOrder!! > menu.topping.count()){
                     println("다시 입력해 주세요")
                 } else{
-                    println("${menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]}에 ${menu.topping[toppingOrder!!-1]}이 담겼습니다. ")
-                    basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],"${menu.topping[toppingOrder!!-1]} 추가"))
-                    basketCost.add(mutableListOf(menu.costList[categoryNum!!-1][beverageOrder!! - 1], menu.toppingCost[toppingOrder!!-1]))
+                    println("${menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1][0]}에 ${menu.topping[toppingOrder!!-1][0]}이 담겼습니다. ")
+//                    basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],"${menu.topping[toppingOrder!!-1]} 추가"))
+//                    basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!! - 1], menu.toppingCost[toppingOrder!!-
+                    basket.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!! -1][0], "${menu.topping[toppingOrder!!-1][0]} 추가"))
+                    basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][0],menu.topping[toppingOrder!!-1][1]))
                     break
                 }
             }
@@ -134,7 +137,6 @@ class Basket(menu:Menu) {
                     println("삭제하시려는 메뉴의 번호를 눌러주세요.")
                     cancelOrder()
                     continue
-
                 } else {
                     println("다시 입력해 주세요")
                     }
@@ -145,9 +147,16 @@ class Basket(menu:Menu) {
     // Cost delete Bug.
     fun cancelOrder() {
         println("다음은 고객님의 주문 내역입니다. 취소하려는 음료의 번호를 눌러주세요.")
-        for (index in 0 until basket.count()) {
-            println("${index + 1}: ${basket[index]}")
+
+        for (beverage in 0 until basket.count()) {
+            print("${beverage + 1}: ")
+            for (index in 0 until basket[beverage].count()) {
+                print("${basket[beverage][index]} ")
+            }
+            println("")
         }
+
+
         while (true) {
             try {
                 deleteBeverage = readLine()!!.toInt()
@@ -164,15 +173,7 @@ class Basket(menu:Menu) {
         }
     }
 
-    fun categoryLogic() {
-        showCategory()
-        setCategory()
-    }
 
-    fun beverageLogic(){
-        showBeverage()
-        setBeverage()
-    }
 
     fun toppingLogic() {
         isTopping()
@@ -181,8 +182,10 @@ class Basket(menu:Menu) {
             showTopping()
             setTopping()
         } else {
-            basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]))
-            basketCost.add(mutableListOf(menu.costList[categoryNum!! - 1][beverageOrder!! - 1]))
+//            basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]))
+//            basketCost.add(mutableListOf(menu.costList[categoryNum!! - 1][beverageOrder!! - 1]))
+            basket.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][0]))
+            basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][1]))
         }
     }
 

@@ -1,17 +1,15 @@
 package com.example.kiosk
 
 import java.lang.NumberFormatException
-import com.example.kiosk.Pay as Pay
-import com.example.kiosk.Setting as Setting
+//import com.example.kiosk.Pay as Pay
 import com.example.kiosk.Basket as Basket
 import com.example.kiosk.Menu as Menu
 
 class Flow {
-
+    // 이렇게 할바에 Basket 클래스와 Pay 클래스에서 각각 Menu를 객체로 선언받는것이 맞다.
     var menu = Menu()
     var basket = Basket(menu)
     var pay = Pay(basket)
-    var setting = Setting(menu)
     var startOrder: Int? = 0
 
     init {
@@ -33,20 +31,21 @@ class Flow {
                 }
             }
         }
+
     }
 
     fun orderFlow() {
         startOrder()
         while (true) {
-            basket.categoryLogic()
-            basket.beverageLogic()
+            basket.showCategory()
+            basket.showBeverage()
             basket.toppingLogic()
             basket.checkOrder()
             if (basket.isOrderChange == 2){
                 break
             }
         }
-
+//        var pay = Pay(basket)
         pay.payLogic()
 
     }
