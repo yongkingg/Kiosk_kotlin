@@ -77,12 +77,8 @@ class Pay(basket: Basket) {
 
     fun calculate() {
         for (beverage in 0 until basket.basketCost.count()) {
-            if (basket.basket[beverage].count() == 1) {
-                total += basket.basketCost[beverage][0]
-            } else {
-                for (index in 0 until basket.basketCost[beverage].count()) {
-                    total += basket.basketCost[beverage][index]
-                }
+            for (index in 0 until basket.basketCost[beverage].count()) {
+                total += basket.basketCost[beverage][index].toString().toInt()
             }
         }
         println("=============================")

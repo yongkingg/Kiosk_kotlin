@@ -9,7 +9,7 @@ class Flow {
     // 이렇게 할바에 Basket 클래스와 Pay 클래스에서 각각 Menu를 객체로 선언받는것이 맞다.
     var menu = Menu()
     var basket = Basket(menu)
-    var pay = Pay(basket)
+    lateinit var pay: Pay
     var startOrder: Int? = 0
 
     init {
@@ -45,7 +45,7 @@ class Flow {
                 break
             }
         }
-//        var pay = Pay(basket)
+        pay = Pay(basket)
         pay.payLogic()
 
     }
@@ -54,4 +54,5 @@ class Flow {
 fun main() {
     var flow = Flow()
     flow.orderFlow()
+
 }

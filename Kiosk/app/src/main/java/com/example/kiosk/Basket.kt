@@ -109,10 +109,8 @@ class Basket(menu:Menu) {
                     println("다시 입력해 주세요")
                 } else{
                     println("${menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1][0]}에 ${menu.topping[toppingOrder!!-1][0]}이 담겼습니다. ")
-//                    basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1],"${menu.topping[toppingOrder!!-1]} 추가"))
-//                    basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!! - 1], menu.toppingCost[toppingOrder!!-
                     basket.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!! -1][0], "${menu.topping[toppingOrder!!-1][0]} 추가"))
-                    basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][0],menu.topping[toppingOrder!!-1][1]))
+                    basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][1],menu.topping[toppingOrder!!-1][1]))
                     break
                 }
             }
@@ -173,8 +171,6 @@ class Basket(menu:Menu) {
         }
     }
 
-
-
     fun toppingLogic() {
         isTopping()
 
@@ -182,8 +178,6 @@ class Basket(menu:Menu) {
             showTopping()
             setTopping()
         } else {
-//            basket.add(mutableListOf(menu.categoryList[categoryNum!! - 1][beverageOrder!! - 1]))
-//            basketCost.add(mutableListOf(menu.costList[categoryNum!! - 1][beverageOrder!! - 1]))
             basket.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][0]))
             basketCost.add(mutableListOf(menu.categoryList[categoryNum!!-1][beverageOrder!!-1][1]))
         }
